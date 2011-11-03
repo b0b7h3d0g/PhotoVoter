@@ -1,0 +1,25 @@
+﻿@model PhotoVoterMvc.Services.Model.ContactData
+@using PhotoVoterMvc
+@using (Ajax.BeginForm("Submit", "Contact", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "contact-form-section" }, new { id = "contact-form" }))
+{
+   @Html.AntiForgeryToken() 
+   @Html.EditorForModel();
+   
+   <input id="submitButton" type="submit" name="SubmitContactForm" value="Send Message" />
+   <div class="validation-summary">@Html.ValidationMessage("NofifyError")</div>
+   
+   <script type="text/javascript">
+      // do as much validation as possible on the client; manually triggered since the form is loaded dynamically
+      // client side validation needs to be added for custom server validators
+      $.validator.unobtrusive.parse("#contact-form");
+
+      $('#contact-form').submit(function () {
+         if ($(this).valid()) 
+            $("#submitButton").prop("disabled", true).attr("value", "Sending...");
+         return true;
+      });
+      
+      // add * to label for all required fields; possible also using ViewData.ModelMetadata.Properties
+      $("[data-val-required]").each(function () { $("label[for='" + $(this).attr('name') + "']").append('<span class="required"> * </span>') });
+   </script>
+}

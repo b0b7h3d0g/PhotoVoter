@@ -1,0 +1,23 @@
+﻿@model PhotoVoterMvc.Services.Model.LoginData 
+@{
+   ViewBag.Title = "Login";
+}
+@section subtitle { Login }
+@section header { <div class="validation-summary">@Html.ValidationMessage("Error")</div> }
+
+<div id="login">
+   <h2>Do you already have an account on one of these sites? <em>Sign in using your account with:</em></h2>
+   <ul>
+      <li class="google">@Html.ActionLink("Sign in with Google", "Authenticate", new { provider = "Google", returnUrl = Model.ReturnUrl })</li>
+      <li class="yahoo">@Html.ActionLink("Sign in with Yahoo", "Authenticate", new { provider = "Yahoo", returnUrl = Model.ReturnUrl })</li>
+      <li class="myopenid">@Html.ActionLink("Sign in with MyOpenId", "Authenticate", new { provider = "MyOpenId", returnUrl = Model.ReturnUrl })</li>
+      <li class="steam">@Html.ActionLink("Sign in with Steam", "Authenticate", new { provider = "Steam", returnUrl = Model.ReturnUrl })</li>
+   </ul>
+   <div class="aside">
+      <h4>What is OpenID?</h4>
+      <p>It&rsquo;s a safe, faster, and easier way to log in to any OpenID-enabled web site.</p>
+      <p>It works on thousands of websites.</p>
+      <p>It&rsquo;s an open standard.</p>
+      <a href="http://openid.net/what/">learn more &raquo;</a>
+   </div>
+</div>

@@ -1,0 +1,41 @@
+@model IEnumerable<PhotoVoterMvc.Services.Model.GalleryData>
+@{
+   ViewBag.Title = ViewBag.GalleryName;
+}
+@section pagehead {
+    <link type="application/rss+xml"  rel="alternate" title="PhotoVoter Feed (RSS)" href="@Url.Action("Feed", "Gallery", new { format = "Rss", galleryName = ViewBag.GalleryName })" />
+    <link type="application/atom+xml" rel="alternate" title="PhotoVoter Feed (ATOM)" href="@Url.Action("Feed", "Gallery", new { format = "Atom", galleryName = ViewBag.GalleryName })" />
+}
+@section subtitle { @Html.ActionLink("Galleries", "Index", "Gallery") &rsaquo; @ViewBag.GalleryName }
+@section header
+{   
+   <ul class="splitter">
+      <li>Filter by:
+         <ul>
+            <li class="@(string.IsNullOrWhiteSpace(ViewBag.Filter) ? "selected" : "")"><a href="@Url.Action("Show", "Gallery")" data-filter="all">Everything</a></li><li
+                class="@(ViewBag.Filter == "upload" ? "selected" : "")"><a href="@Url.Action("Show", "Gallery")" data-filter="upload">My uploads</a></li><li
+                class="last-child @(ViewBag.Filter == "user" ? "selected" : "")"><a href="@Url.Action("Show", "Gallery")" data-filter="user">My votes</a></li></ul>
+      </li>
+      <li>Sort by:
+         <ul>
+            <li class="@(string.IsNullOrWhiteSpace(ViewBag.SortOrder) ? "selected" : "")"><a href="@Url.Action("Show", "Gallery")" data-sort="random" class="live">Random</a></li>@if ((ViewBag.StatsEnabled ?? false) || ViewBag.IsAdminUser) {<li
+                class="@(ViewBag.SortOrder == "byvote" ? "selected" : "")"><a href="@Url.Action("Show", "Gallery")" data-sort="byvote" class="live">Popularity</a></li>}<li
+                class="last-child @(ViewBag.SortOrder == "bydate" ? "selected" : "")"><a href="@Url.Action("Show", "Gallery")" data-sort="bydate" class="live">Date</a></li></ul>
+      </li>
+      @if (ViewBag.IsAdminUser) {
+      <li class="admin">Admin: 
+         <ul>
+             <li class="@(ViewBag.VotingEnabled ? "selected" : "")"><a href="@Url.Action("ToggleSettings", "Gallery", new { galleryName = ViewBag.GalleryName, param = "voting" })">Voting</a></li><li
+                 class="@(ViewBag.AllowUpload ? "selected" : "")"><a href="@Url.Action("ToggleSettings", "Gallery", new { galleryName = ViewBag.GalleryName, param = "uploading" })">Uploading</a></li><li
+                 class="last-child @(ViewBag.StatsEnabled ? "selected" : "")"><a href="@Url.Action("ToggleSettings", "Gallery", new { galleryName = ViewBag.GalleryName, param = "stats" })">Stats</a></li></ul>
+      </li>
+      }
+   </ul>
+}
+@Html.ValidationSummary()
+@Html.Partial("_GalleryImages")
+
+@if (ViewBag.AllowUpload)
+{ 
+   @Html.Partial("_ImageUploader")
+}

@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoVoterMvc", "PhotoVoterMvc\PhotoVoterMvc.csproj", "{D3A67B1B-C114-4F3C-8E1E-3D16B8829771}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{329FC272-B3DE-4FF2-8EE4-EED6FD707307}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		PhotoVoter.vsmdi = PhotoVoter.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs.visma.net:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PhotoVoterMvc\\PhotoVoterMvc.csproj
+		SccProjectName1 = PhotoVoterMvc
+		SccLocalPath1 = PhotoVoterMvc
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = PhotoVoter.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3A67B1B-C114-4F3C-8E1E-3D16B8829771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3A67B1B-C114-4F3C-8E1E-3D16B8829771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3A67B1B-C114-4F3C-8E1E-3D16B8829771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3A67B1B-C114-4F3C-8E1E-3D16B8829771}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,21 @@
+﻿@using PhotoVoterMvc
+@using PhotoVoterMvc.Extenders
+@model PhotoVoterMvc.Services.Model.GalleryData
+@using (Ajax.BeginForm("Create", "Gallery", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "new-gallery" }))
+{
+   if(Model != null && !string.IsNullOrEmpty(Model.FullPath))
+   {
+      <script>document.location.href = '@Url.Action("Index")';</script>
+   }
+   else
+   {
+      <div class="no-image">
+         @Html.ValidationMessage("Error")
+      </div>
+      <div class="description">
+         <input name="Name" class="name" type="text" placeholder="Gallery name" value="@Model.Name" />
+         <a class="cancel" href="#">Cancel</a>
+         <button type="submit">Create</button>
+      </div>
+   }
+}
