@@ -1,0 +1,10 @@
+_ReSharper*/
+Research/
+bin/
+obj/
+*.suo
+*.log
+*.user
+*.vssscc
+*.pptx
+Thumbs.db

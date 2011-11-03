@@ -1,7 +1,0 @@
-#footer div { display: none }
-#header .new-gallery { display: none }
-ul.splitter ul li { display: none }
-ul.splitter ul li a { border: 0 }
-ul.splitter ul li.selected { display: inline; border: 0;  -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none }
-.counter span { color: #000; border: 2px solid #555; }
-
