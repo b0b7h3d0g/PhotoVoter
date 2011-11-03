@@ -1,0 +1,95 @@
+
+-- --------------------------------------------------
+-- Entity Designer DDL Script for SQL Server Compact Edition
+-- --------------------------------------------------
+-- Date Created: 10/28/2011 20:54:48
+-- Generated from EDMX file: C:\Dev\Web\PhotoVoter\PhotoVoterMvc\Models\DataModel.edmx
+-- --------------------------------------------------
+
+
+-- --------------------------------------------------
+-- Dropping existing FOREIGN KEY constraints
+-- NOTE: if the constraint does not exist, an ignorable error will be reported.
+-- --------------------------------------------------
+
+
+-- --------------------------------------------------
+-- Dropping existing tables
+-- NOTE: if the table does not exist, an ignorable error will be reported.
+-- --------------------------------------------------
+
+    DROP TABLE [Settings];
+GO
+    DROP TABLE [Uploads];
+GO
+    DROP TABLE [Votes];
+GO
+
+-- --------------------------------------------------
+-- Creating all tables
+-- --------------------------------------------------
+
+-- Creating table 'Settings'
+CREATE TABLE [Settings] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Gallery] nvarchar(100)  NOT NULL,
+    [VotingEnabled] bit  NOT NULL,
+    [UploadEnabled] bit  NOT NULL,
+    [StatsEnabled] bit  NOT NULL
+);
+GO
+
+-- Creating table 'Uploads'
+CREATE TABLE [Uploads] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Gallery] nvarchar(50)  NULL,
+    [Image] nvarchar(100)  NULL,
+    [User] nvarchar(255)  NULL,
+    [LastUpdate] datetime  NULL,
+    [Title] nvarchar(255)  NULL
+);
+GO
+
+-- Creating table 'Votes'
+CREATE TABLE [Votes] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [LastUpdate] datetime  NULL,
+    [Image] nvarchar(100)  NULL,
+    [User] nvarchar(255)  NULL,
+    [Gallery] nvarchar(50)  NULL
+);
+GO
+
+-- --------------------------------------------------
+-- Creating all PRIMARY KEY constraints
+-- --------------------------------------------------
+
+-- Creating primary key on [Id] in table 'Settings'
+ALTER TABLE [Settings]
+ADD CONSTRAINT [PK_Settings]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'Uploads'
+ALTER TABLE [Uploads]
+ADD CONSTRAINT [PK_Uploads]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'Votes'
+ALTER TABLE [Votes]
+ADD CONSTRAINT [PK_Votes]
+    PRIMARY KEY ([Id] );
+GO
+
+-- --------------------------------------------------
+-- Creating all FOREIGN KEY constraints
+-- --------------------------------------------------
+CREATE UNIQUE INDEX IX_Gallery ON Settings (Gallery);
+CREATE INDEX IX_Gallery ON Votes (Gallery);
+CREATE UNIQUE INDEX IX_Votes ON Votes ([Image], [User], Gallery);
+CREATE UNIQUE INDEX IX_Uploads ON Uploads ([Image], [User], Gallery);
+
+-- --------------------------------------------------
+-- Script has ended
+-- --------------------------------------------------

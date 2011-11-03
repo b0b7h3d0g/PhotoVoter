@@ -1,0 +1,41 @@
+﻿@using PhotoVoterMvc
+@using PhotoVoterMvc.Extenders
+@using PhotoVoterMvc.Services.Model
+@model IEnumerable<PhotoVoterMvc.Services.Model.GalleryData>
+@{
+   ViewBag.Title = "Welcome"; 
+}
+@section subtitle { Galleries }
+@section header {
+   @if (ViewBag.IsAdminUser){<a href="#" class="new-gallery">New gallery</a>}
+}
+
+<ul id="gallery" class="gallery">
+   @if (ViewBag.IsAdminUser)
+   {
+   <li id="new-gallery">
+      @Html.Partial("_CreateGallery", new GalleryData())
+   </li>
+   }
+   @foreach (var item in Model)
+   {
+   <li>
+      <a class="frame noise" href="@Url.Action("Show", "Gallery", new { galleryName = item.Gallery })" title="Click to view all photos">
+         @if (item.TotalPhotos > 0)
+         {
+            <img src="@Url.ThumbnailUrl(item.Gallery, "thumbnail.rnd")" alt="Click to view all photos" />   
+         }
+         else
+         {
+            <div class="no-image"></div>
+         }
+         <span class="description">
+            <span class="name">@item.Gallery</span>
+            <span class="date">@item.PublishDate.ToShortDateString()</span>
+            <span class="votes">@item.TotalPhotos photo(s)@if (item.VoteCount > 0){<text>, @item.VoteCount vote(s) by @item.UserCount user(s)</text>}</span>
+         </span>
+      </a>
+   </li>
+   }
+</ul>
+<div style="clear: both"></div>

@@ -1,0 +1,17 @@
+Vote(Oslo Sjølyst, AU-wp1.jpg, )
+Vote(Oslo Sjølyst, AU-wp1.jpg, )
+Vote(Oslo Sjølyst, AU-wp2.jpg, )
+Vote(Oslo Sjølyst, AU-wp1.jpg, )
+Vote(Oslo Sjølyst, AU-wp2.jpg, )
+Vote(Oslo Sjølyst, AU-wp1.jpg, )
+Vote(Oslo Sjølyst, AU-wp2.jpg, )
+Vote(Oslo Sjølyst, AU-wp1.jpg, )
+Vote(Oslo Sjølyst, AU-wp2.jpg, )
+28.02.2011 13:47:56: Vote(Oslo Sjølyst, AU-wp1.jpg, ), User: DCS-T60\Dan
+  --> this was a ajax call
+28.02.2011 13:47:57: Vote(Oslo Sjølyst, AU-wp4.jpg, ), User: DCS-T60\Dan
+  --> this was a ajax call
+28.02.2011 13:47:58: Vote(Oslo Sjølyst, AU-wp1.jpg, ), User: DCS-T60\Dan
+  --> this was a ajax call
+28.02.2011 13:47:59: Vote(Oslo Sjølyst, AU-wp4.jpg, ), User: DCS-T60\Dan
+  --> this was a ajax call

@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D3A67B1B-C114-4F3C-8E1E-3D16B8829771}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhotoVoterMvc</RootNamespace>
+    <AssemblyName>PhotoVoterMvc</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>true</IncludeIisSettings>
+    <IncludeAppPool>true</IncludeAppPool>
+    <DeployIisAppPath>Default Web Site\PhotoVoter</DeployIisAppPath>
+    <DeployIisAppPhysicalPath>%25SystemDrive%25\inetpub\wwwroot\PhotoVoter</DeployIisAppPhysicalPath>
+    <DesktopBuildPackageLocation>Package\PhotoVoter.zip</DesktopBuildPackageLocation>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="DatabaseEntities-Deployment" Order="1">
+          <Destination Path="" />
+          <Object Type="dbFullSql">
+            <PreSource Path="Data Source=D:\Dev\Web\PhotoVoter\PhotoVoterMvc\App_Data\Database.sdf" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" />
+            <Source Path="obj\Debug\AutoScripts\DatabaseEntities-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DeployIisAppPath>Default Web Site/PhotoVoterMvc</DeployIisAppPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetOpenAuth">
+      <HintPath>..\lib\DotNetOpenAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="MefContrib, Version=1.2.0.0, Culture=neutral, PublicKeyToken=61319b4ffd6fe6d3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MefContrib.1.2.0.0\lib\MefContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="MefContrib.Web.Mvc, Version=1.2.0.0, Culture=neutral, PublicKeyToken=61319b4ffd6fe6d3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MefContrib.MVC3.1.2.0.0\lib\MefContrib.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages" />
+    <Reference Include="System.Web.Helpers" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator, Version=1.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AppStart_MefContribMVC3.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Extenders\GalleryCacheAttribute.cs" />
+    <Compile Include="Extenders\CssOptimizationModule.cs" />
+    <Compile Include="Extenders\GalleryAuthorize.cs" />
+    <Compile Include="Extenders\GalleryRoleProvider.cs" />
+    <Compile Include="Extenders\RssActionResult.cs" />
+    <Compile Include="Extenders\ValidateEmailAttribute.cs" />
+    <Compile Include="Services\Exceptions\GalleryAlreadyExistsException.cs" />
+    <Compile Include="Services\Exceptions\NotificationException.cs" />
+    <Compile Include="Services\Interfaces\IEmailNotification.cs" />
+    <Compile Include="Services\Interfaces\INotificationService.cs" />
+    <Compile Include="Services\Model\ContactData.cs" />
+    <Compile Include="Services\Interfaces\IGalleryService.cs" />
+    <Compile Include="Services\Model\LoginData.cs" />
+    <Compile Include="Services\Services\EmailNotificationService.cs" />
+    <Compile Include="Services\Services\IGalleryService.cs" />
+    <Content Include="App_Themes\base\images\camera.png" />
+    <Content Include="App_Themes\base\images\circle_plus.png" />
+    <Content Include="App_Themes\base\images\email.png" />
+    <Content Include="App_Themes\base\images\google.png" />
+    <Content Include="App_Themes\base\images\img01.png" />
+    <Content Include="App_Themes\base\images\myopenid.png" />
+    <Content Include="App_Themes\base\images\noize.png" />
+    <Content Include="App_Themes\base\images\openid.png" />
+    <Content Include="App_Themes\base\images\steam.png" />
+    <Content Include="App_Themes\base\images\yahoo.png" />
+    <Content Include="Content\Around the world\AU-wp1.jpg" />
+    <Content Include="Content\Around the world\AU-wp2.jpg" />
+    <Content Include="Content\Around the world\AU-wp3.jpg" />
+    <Content Include="Content\Around the world\AU-wp4.jpg" />
+    <Content Include="Content\Around the world\AU-wp5.jpg" />
+    <Content Include="Content\Around the world\AU-wp6.jpg" />
+    <Content Include="Content\Around the world\CA-wp1.jpg" />
+    <Content Include="Content\Around the world\CA-wp2.jpg" />
+    <Content Include="Content\Around the world\CA-wp3.jpg" />
+    <Content Include="Content\Around the world\CA-wp4.jpg" />
+    <Content Include="Content\Around the world\CA-wp5.jpg" />
+    <Content Include="Content\Around the world\CA-wp6.jpg" />
+    <Content Include="Content\Around the world\GB-wp1.jpg" />
+    <Content Include="Content\Around the world\GB-wp2.jpg" />
+    <Content Include="Content\Around the world\GB-wp3.jpg" />
+    <Content Include="Content\Around the world\GB-wp4.jpg" />
+    <Content Include="Content\Around the world\GB-wp5.jpg" />
+    <Content Include="Content\Around the world\GB-wp6.jpg" />
+    <Content Include="Content\Around the world\US-wp1.jpg" />
+    <Content Include="Content\Around the world\US-wp2.jpg" />
+    <Content Include="Content\Around the world\US-wp3.jpg" />
+    <Content Include="Content\Around the world\US-wp4.jpg" />
+    <Content Include="Content\Around the world\US-wp5.jpg" />
+    <Content Include="Content\Around the world\US-wp6.jpg" />
+    <Content Include="Content\Around the world\ZA-wp2.jpg" />
+    <Content Include="Content\Around the world\ZA-wp3.jpg" />
+    <Content Include="Content\Around the world\ZA-wp4.jpg" />
+    <Content Include="Content\Around the world\ZA-wp5.jpg" />
+    <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
+    <Content Include="TODO.txt" />
+    <Content Include="App_Themes\base\images\error.png" />
+    <Content Include="App_Themes\base\images\fancy_counter.png" />
+    <Content Include="App_Themes\base\images\fancy_delete.png" />
+    <Content Include="App_Themes\base\images\home.png" />
+    <Content Include="App_Themes\base\images\loading.gif" />
+    <Content Include="App_Themes\base\images\logo.png" />
+    <Content Include="App_Themes\base\images\splitter.png" />
+    <Content Include="App_Themes\base\images\star_32.png" />
+    <Content Include="App_Themes\base\images\star_48.png" />
+    <Compile Include="Controllers\GalleryController.cs" />
+    <Compile Include="Services\ControllerServiceResolver.cs" />
+    <Compile Include="Extenders\ExtensionMethods.cs" />
+    <Compile Include="Extenders\HttpSubstitution.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Model\EmailNotification.cs" />
+    <Compile Include="Services\Model\GalleryData.cs" />
+    <Compile Include="Services\Services\GalleryService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="App_Themes\base\images\upload-48.png" />
+    <Content Include="App_Themes\base\images\upload-96.png" />
+    <Content Include="favicon.ico" />
+    <Content Include="Scripts\file.uploader.js" />
+    <Content Include="Scripts\jquery-plugins.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery.quicksand.js" />
+    <Content Include="Scripts\gallery.scripts.js" />
+    <Content Include="packages.config" />
+    <Content Include="Views\Contact\Contact.cshtml" />
+    <Content Include="Views\Contact\_ContactForm.cshtml" />
+    <Content Include="Views\Contact\ThanksForFeedback.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <None Include="App_Themes\base\images\img01.pdn" />
+    <Content Include="Views\Gallery\_CreateGallery.cshtml" />
+    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
+    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
+    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
+    <None Include="_bin_deployableAssemblies\amd64\sqlcese40.dll" />
+    <None Include="_bin_deployableAssemblies\amd64\sqlceqp40.dll" />
+    <None Include="_bin_deployableAssemblies\amd64\sqlceme40.dll" />
+    <None Include="_bin_deployableAssemblies\amd64\sqlceer40EN.dll" />
+    <None Include="_bin_deployableAssemblies\amd64\sqlcecompact40.dll" />
+    <None Include="_bin_deployableAssemblies\amd64\sqlceca40.dll" />
+    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\README_ENU.txt" />
+    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\msvcr90.dll" />
+    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
+    <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
+    <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
+    <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
+    <None Include="_bin_deployableAssemblies\x86\sqlceer40EN.dll" />
+    <None Include="_bin_deployableAssemblies\x86\sqlcecompact40.dll" />
+    <None Include="_bin_deployableAssemblies\x86\sqlceca40.dll" />
+    <None Include="_bin_deployableAssemblies\System.Data.SqlServerCe.Entity\System.Data.SqlServerCe.Entity.dll" />
+    <None Include="_bin_deployableAssemblies\EN\System.Data.SqlServerCe.xml" />
+    <None Include="_bin_deployableAssemblies\System.Data.SqlServerCe.dll" />
+    <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.WebPages.Deployment.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Razor.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Helpers.dll" />
+    <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\base\images\blank.gif" />
+    <Content Include="App_Themes\base\images\fancybox-x.png" />
+    <Content Include="App_Themes\base\images\fancybox-y.png" />
+    <Content Include="App_Themes\base\images\fancybox.png" />
+    <Content Include="App_Themes\base\images\fancy_close.png" />
+    <Content Include="App_Themes\base\images\fancy_loading.png" />
+    <Content Include="App_Themes\base\images\fancy_nav_left.png" />
+    <Content Include="App_Themes\base\images\fancy_nav_right.png" />
+    <Content Include="App_Themes\base\images\fancy_shadow_e.png" />
+    <Content Include="App_Themes\base\images\fancy_shadow_n.png" />
+    <Content Include="App_Themes\base\images\fancy_shadow_ne.png" />
+    <Content Include="App_Themes\base\images\fancy_shadow_nw.png" />
+    <Content Include="App_Themes\base\images\fancy_shadow_s.png" />
+    <Content Include="App_Themes\base\images\fancy_shadow_se.png" />
+    <Content Include="App_Themes\base\images\fancy_shadow_sw.png" />
+    <Content Include="App_Themes\base\images\fancy_shadow_w.png" />
+    <Content Include="App_Themes\base\images\fancy_title_left.png" />
+    <Content Include="App_Themes\base\images\fancy_title_main.png" />
+    <Content Include="App_Themes\base\images\fancy_title_over.png" />
+    <Content Include="App_Themes\base\images\fancy_title_right.png" />
+    <Content Include="App_Themes\base\images\img03.gif" />
+    <Content Include="Scripts\jquery.easing-1.3.pack.js" />
+    <Content Include="Scripts\jquery.fancybox-1.3.4.js" />
+    <Content Include="Scripts\jquery.fancybox-1.3.4.pack.js" />
+    <Content Include="Scripts\jquery.mousewheel-3.0.4.pack.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Views\Gallery\Show.cshtml" />
+    <Content Include="Scripts\jquery.reflection.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Themes\base\style.css" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\DataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gallery\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gallery\_GalleryImage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gallery\_GalleryImages.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gallery\_ImageUploader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\DataModel.edmx.sqlce" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1782</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/PhotoVoterMvc</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,11 @@
+﻿@model PhotoVoterMvc.Services.Model.ContactData
+@{
+   ViewBag.Title = "Contact"; 
+}
+@section subtitle 
+{
+   @Html.ActionLink("Galleries", "Index", "Gallery") &rsaquo; @ViewBag.Title
+}
+<div id="contact-form-section">
+   @Html.Partial("_ContactForm", Model)
+</div>

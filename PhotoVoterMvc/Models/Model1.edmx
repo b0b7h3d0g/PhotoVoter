@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="F0001Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="F0001ModelStoreContainer" />
+        <Function Name="AgeAnalysisCust" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FrDt" Type="int" Mode="In" />
+          <Parameter Name="FromCustNo" Type="int" Mode="In" />
+          <Parameter Name="ToCustNo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AgeAnalysisSup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FrDt" Type="int" Mode="In" />
+          <Parameter Name="FromSupNo" Type="int" Mode="In" />
+          <Parameter Name="ToSupNo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CustDiscountPercent" ReturnType="float" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetDateO" ReturnType="datetime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Date" Type="int" Mode="In" />
+          <Parameter Name="TimeInMilliseconds" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetProdDesc" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProdNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="LanguageNo" Type="int" Mode="In" />
+          <Parameter Name="DefaultValue" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetUnitDesc" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UnitNo" Type="int" Mode="In" />
+          <Parameter Name="LanguageNo" Type="int" Mode="In" />
+          <Parameter Name="DefaultValue" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="HistKundResk" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FrKund" Type="int" Mode="In" />
+          <Parameter Name="TillKund" Type="int" Mode="In" />
+          <Parameter Name="Datum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="HistLevResk" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FrLev" Type="int" Mode="In" />
+          <Parameter Name="TillLev" Type="int" Mode="In" />
+          <Parameter Name="Datum" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PrDcMat_SalePr" ReturnType="float" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PrDcMatLnNo" Type="int" Mode="In" />
+          <Parameter Name="Quantity" Type="float" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetProductStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductId" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="ExcludeStock" Type="varchar" Mode="In" />
+          <Parameter Name="AvailableStock" Type="float" Mode="InOut" />
+          <Parameter Name="PhysicalStock" Type="float" Mode="InOut" />
+          <Parameter Name="StockInChanges" Type="float" Mode="InOut" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VA_IDAndName" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="VAS_IDAndName" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="VatPercent" ReturnType="float" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductId" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="VatPercentEx" ReturnType="float" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VatNo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="w_GetProductPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductId" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="SpecVersion" Type="int" Mode="In" />
+          <Parameter Name="Quantity" Type="float" Mode="In" />
+          <Parameter Name="PostNo" Type="varchar" Mode="In" />
+          <Parameter Name="ArticlePrice" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleGrossPrice" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleCustomerPrice" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleCustomerGrossPrice" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleDiscount1" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleDiscount2" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleDiscount3" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleDiscount4" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleDiscount5" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleVatPercent" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleCurrency" Type="varchar" Mode="InOut" />
+          <Parameter Name="NoUnit" Type="float" Mode="InOut" />
+        </Function>
+        <Function Name="w_GetProductPrice_custom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductId" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="SpecVersion" Type="int" Mode="In" />
+          <Parameter Name="Quantity" Type="float" Mode="In" />
+          <Parameter Name="PostNo" Type="varchar" Mode="In" />
+          <Parameter Name="ArticlePrice" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleGrossPrice" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleCustomerPrice" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleCustomerGrossPrice" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleDiscount1" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleDiscount2" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleDiscount3" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleDiscount4" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleDiscount5" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleVatPercent" Type="float" Mode="InOut" />
+          <Parameter Name="ArticleCurrency" Type="varchar" Mode="InOut" />
+          <Parameter Name="NoUnit" Type="float" Mode="InOut" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="F0001Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="F0001Entities2" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="GetPrice">
+            <Parameter Name="ProductId" Mode="In" Type="String" />
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+            <Parameter Name="SpecVersion" Mode="In" Type="Int32" />
+            <Parameter Name="Quantity" Mode="In" Type="Double" />
+            <Parameter Name="PostNo" Mode="In" Type="String" />
+            <Parameter Name="ArticlePrice" Mode="InOut" Type="Double" />
+            <Parameter Name="ArticleGrossPrice" Mode="InOut" Type="Double" />
+            <Parameter Name="ArticleCustomerPrice" Mode="InOut" Type="Double" />
+            <Parameter Name="ArticleCustomerGrossPrice" Mode="InOut" Type="Double" />
+            <Parameter Name="ArticleDiscount1" Mode="InOut" Type="Double" />
+            <Parameter Name="ArticleDiscount2" Mode="InOut" Type="Double" />
+            <Parameter Name="ArticleDiscount3" Mode="InOut" Type="Double" />
+            <Parameter Name="ArticleDiscount4" Mode="InOut" Type="Double" />
+            <Parameter Name="ArticleDiscount5" Mode="InOut" Type="Double" />
+            <Parameter Name="ArticleVatPercent" Mode="InOut" Type="Double" />
+            <Parameter Name="ArticleCurrency" Mode="InOut" Type="String" />
+            <Parameter Name="NoUnit" Mode="InOut" Type="Double" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ComplexType1" />
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="F0001ModelStoreContainer" CdmEntityContainer="F0001Entities2" >
+          <FunctionImportMapping FunctionImportName="GetPrice" FunctionName="F0001Model.Store.w_GetProductPrice" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1" />
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

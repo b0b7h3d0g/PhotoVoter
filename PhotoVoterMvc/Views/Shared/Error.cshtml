@@ -1,0 +1,18 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+   ViewBag.Title = "Error";
+   ViewBag.Subtitle = "Application error";
+}
+<div id="error">
+   <h1>
+      Well, this is embarassing.
+   </h1>
+   <h2>
+      There was an error while processing your request.
+   </h2>
+   <h3>
+      @Model.Exception.GetType().ToString()
+      <br />
+      @Model.Exception.Message
+   </h3>
+</div>
