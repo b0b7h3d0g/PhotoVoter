@@ -6,5 +6,6 @@ obj/
 *.log
 *.user
 *.vssscc
+*.vspscc
 *.pptx
 Thumbs.db
