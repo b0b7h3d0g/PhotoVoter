@@ -1,4 +1,0 @@
-﻿- Support for ranking images
-- Support for noSQL (Raven, Mongo)
-- Create mobile view jQTouch, jQMobile
-- Upload using http://aquantum-demo.appspot.com/file-upload
