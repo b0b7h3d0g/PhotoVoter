@@ -18,16 +18,6 @@ namespace PhotoVoterMvc.Services
       /// <summary>
       /// 
       /// </summary>
-      /// <param name="galleryName"></param>
-      /// <param name="user"></param>
-      /// <param name="filter"></param>
-      /// <param name="sort"></param>
-      /// <returns></returns>
-      IEnumerable<GalleryData> GetGalleryObjects(string galleryName, IPrincipal user, string filter, string sort);
-
-      /// <summary>
-      /// 
-      /// </summary>
       /// <param name="top"></param>
       /// <returns></returns>
       IEnumerable<GalleryData> GetGalleries(int top);
@@ -36,8 +26,12 @@ namespace PhotoVoterMvc.Services
       /// 
       /// </summary>
       /// <param name="galleryName"></param>
+      /// <param name="includeDetails"></param>
+      /// <param name="user"></param>
+      /// <param name="filter">The filter</param>
+      /// <param name="sort">The sort order</param>
       /// <returns></returns>
-      GalleryData GetGallery(string galleryName);
+      GalleryData GetGallery(string galleryName, bool includeDetails, IPrincipal user, string filter = null, string sort = null);
 
       /// <summary>
       /// 
@@ -48,7 +42,7 @@ namespace PhotoVoterMvc.Services
       /// <param name="removeVote"></param>
       /// <exception cref="HttpException">If something went wrong</exception>
       /// <returns></returns>
-      GalleryData Vote(string galleryName, string imageName, IPrincipal user, bool? removeVote = null);
+      GalleryItem Vote(string galleryName, string imageName, IPrincipal user, bool? removeVote = null);
 
       /// <summary>
       /// Resizes a gallery image
@@ -89,7 +83,7 @@ namespace PhotoVoterMvc.Services
       /// <param name="user"></param>
       /// <exception cref="HttpException">If something went wrong</exception>
       /// <returns></returns>
-      GalleryData GetGalleryImage(string galleryName, string imageName, IPrincipal user);
+      GalleryItem GetGalleryImage(string galleryName, string imageName, IPrincipal user);
 
       /// <summary>
       /// 

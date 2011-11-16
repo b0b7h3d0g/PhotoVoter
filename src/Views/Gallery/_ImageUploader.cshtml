@@ -1,4 +1,5 @@
-﻿<div id="file-uploader" class="qq-uploader">
+﻿@model PhotoVoterMvc.Services.Model.GalleryData
+<div id="file-uploader" class="qq-uploader">
    <div class="qq-upload-drop-area">Drop your photos here to upload.</div>
    <div class="qq-upload-button">Upload</div>
    <br />
@@ -21,7 +22,7 @@
          allowedExtensions: ['jpg', 'png', 'jpeg'],
 
          action: '@Url.Action("UploadImage", "Gallery")',
-         params: { 'galleryName': '@Html.Raw(ViewBag.GalleryName)' },
+         params: { 'galleryName': '@Html.Raw(Model.Name)' },
 
          onSubmit: function (id, fileName) {
             var authenticated = @User.Identity.IsAuthenticated.ToString().ToLower();
@@ -34,7 +35,7 @@
             var upload = $('li.photo span.qq-upload-file:contains("' + fileName + '")').parent();
             
             if (response.success) {
-               $.get('@Url.Action("GetImage", "Gallery")', { galleryName: '@Html.Raw(ViewBag.GalleryName)', imageName: fileName },
+               $.get('@Url.Action("GetImage", "Gallery")', { galleryName: '@Html.Raw(Model.Name)', imageName: fileName },
                   function (ajaxData) { // on complete
                      var photo = $(ajaxData).css('display', 'none');
                      upload.replaceWith(photo);

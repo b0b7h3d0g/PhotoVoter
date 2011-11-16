@@ -25,9 +25,9 @@ gallery.vote = function (anchor) {
       success: function (data) {
          star.toggleClass('voted', data.UserVote);
          counter
-            .attr("title", data.VoteCount + ' person(s) voted this photo')
-            .toggleClass('no-votes', data.VoteCount == 0)
-            .find('span').html(data.VoteCount);
+            .attr("title", data.TotalVotes + ' person(s) voted this photo')
+            .toggleClass('no-votes', data.TotalVotes == 0)
+            .find('span').html(data.TotalVotes);
 
       },
       complete: function () {

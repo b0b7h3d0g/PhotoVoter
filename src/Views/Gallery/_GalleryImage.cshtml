@@ -1,19 +1,17 @@
 ﻿@using PhotoVoterMvc
 @using PhotoVoterMvc.Extenders
-@model PhotoVoterMvc.Services.Model.GalleryData
+@model PhotoVoterMvc.Services.Model.GalleryItem
 @{
    var ownedByUser = User.Identity.Name.Equals(Model.User, StringComparison.OrdinalIgnoreCase);  
 }
       <li id="@Model.GetHash()" class="photo @if(Model.UserVote){<text>user-voted</text>}" data-id="@Model.Name" >
-         <a rel="appendix" href="@Url.ImageUrl(Model.Gallery, Model.Name)" title="@Model.Title@if(ViewBag.IsAdminUser && Model.User != null) {<text>, @Model.User</text>}"><img 
-            src="@Url.ThumbnailUrl(Model.Gallery, Model.Name)" alt="@Model.Title" title="Click to zoom" />
-         </a>
+         <a rel="appendix" href="@Url.ImageUrl(Model.Gallery, Model.Name)" title="@Model.Title@if(ViewBag.IsAdminUser && Model.User != null) {<text>, @Model.User</text>}"><img src="@Url.ThumbnailUrl(Model.Gallery, Model.Name)" alt="@Model.Title" title="Click to zoom" /></a>
          <div class="info" data-id="@Model.Name">
             @if (ViewBag.VotingEnabled && !ownedByUser) {
             <a class="star @if(Model.UserVote){<text>voted</text>}" href="@Url.Action("ToggleVote", new { GalleryName = Model.Gallery, ImageName = Model.Name })" title="Click to add or remove vote">Vote</a>
             }
             @if (ViewBag.StatsEnabled) {
-            <div class="counter @if(Model.VoteCount == 0){<text>no-votes</text>}" title="@Model.VoteCount person(s) liked this photo"><span>@(Model.VoteCount)</span></div>
+            <div class="counter @if(Model.TotalVotes == 0){<text>no-votes</text>}" title="@Model.TotalVotes person(s) liked this photo"><span>@(Model.TotalVotes)</span></div>
             }
             @if (ViewBag.AllowUpload && (ownedByUser || ViewBag.IsAdminUser)) {
             <a class="delete" href="@Url.Action("DeleteImage", new { GalleryName = Model.Gallery, ImageName = Model.Name })" title="Delete this image">Delete</a>

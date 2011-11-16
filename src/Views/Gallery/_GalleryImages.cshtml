@@ -1,6 +1,6 @@
-﻿@model System.Collections.Generic.IEnumerable<PhotoVoterMvc.Services.Model.GalleryData>
+﻿@model PhotoVoterMvc.Services.Model.GalleryData
    <ul id="photos" class="photos">
-      @foreach (var item in Model) { 
+      @foreach (var item in Model.Photos) { 
         Html.RenderPartial("_GalleryImage", item);
       }  
    </ul>

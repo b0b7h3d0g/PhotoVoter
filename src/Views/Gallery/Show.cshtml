@@ -1,12 +1,12 @@
-@model IEnumerable<PhotoVoterMvc.Services.Model.GalleryData>
+@model PhotoVoterMvc.Services.Model.GalleryData
 @{
-   ViewBag.Title = ViewBag.GalleryName;
+   ViewBag.Title = Model.Name;
 }
 @section pagehead {
-    <link type="application/rss+xml"  rel="alternate" title="PhotoVoter Feed (RSS)" href="@Url.Action("Feed", "Gallery", new { format = "Rss", galleryName = ViewBag.GalleryName })" />
-    <link type="application/atom+xml" rel="alternate" title="PhotoVoter Feed (ATOM)" href="@Url.Action("Feed", "Gallery", new { format = "Atom", galleryName = ViewBag.GalleryName })" />
+    <link type="application/rss+xml"  rel="alternate" title="PhotoVoter Feed (RSS)" href="@Url.Action("Feed", "Gallery", new { format = "Rss", galleryName = Model.Name })" />
+    <link type="application/atom+xml" rel="alternate" title="PhotoVoter Feed (ATOM)" href="@Url.Action("Feed", "Gallery", new { format = "Atom", galleryName = Model.Name })" />
 }
-@section subtitle { @Html.ActionLink("Galleries", "Index", "Gallery") &rsaquo; @ViewBag.GalleryName }
+@section subtitle { @Html.ActionLink("Galleries", "Index", "Gallery") &rsaquo; @Model.Name }
 @section header
 {   
    <ul class="splitter">
@@ -25,13 +25,14 @@
       @if (ViewBag.IsAdminUser) {
       <li class="admin">Admin: 
          <ul>
-             <li class="@(ViewBag.VotingEnabled ? "selected" : "")"><a href="@Url.Action("ToggleSettings", "Gallery", new { galleryName = ViewBag.GalleryName, param = "voting" })">Voting</a></li><li
-                 class="@(ViewBag.AllowUpload ? "selected" : "")"><a href="@Url.Action("ToggleSettings", "Gallery", new { galleryName = ViewBag.GalleryName, param = "uploading" })">Uploading</a></li><li
-                 class="last-child @(ViewBag.StatsEnabled ? "selected" : "")"><a href="@Url.Action("ToggleSettings", "Gallery", new { galleryName = ViewBag.GalleryName, param = "stats" })">Stats</a></li></ul>
+             <li class="@(ViewBag.VotingEnabled ? "selected" : "")"><a href="@Url.Action("ToggleSettings", "Gallery", new { galleryName = Model.Name, param = "voting" })">Voting</a></li><li
+                 class="@(ViewBag.AllowUpload ? "selected" : "")"><a href="@Url.Action("ToggleSettings", "Gallery", new { galleryName = Model.Name, param = "uploading" })">Uploading</a></li><li
+                 class="last-child @(ViewBag.StatsEnabled ? "selected" : "")"><a href="@Url.Action("ToggleSettings", "Gallery", new { galleryName = Model.Name, param = "stats" })">Stats</a></li></ul>
       </li>
       }
    </ul>
 }
+
 @Html.ValidationSummary()
 @Html.Partial("_GalleryImages")
 
@@ -39,3 +40,14 @@
 { 
    @Html.Partial("_ImageUploader")
 }
+
+@*
+@if (ViewBag.StatsEnabled)
+{
+   <ul class="stats">
+      <li class="pictures" title="Total photos">@Model.Photos.Count()</li>
+      <li class="votes" title="Total votes">@Model.TotalVotes</li>
+      <li class="users" title="Total users">@Model.TotalUsers</li>
+   </ul>
+}
+*@

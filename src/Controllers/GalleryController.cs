@@ -66,33 +66,32 @@ namespace PhotoVoterMvc.Controllers
          var baseUri = Request.Url;
          
          var settings = GalleryService.GetGallerySettings(galleryName);
-         var modelData = GalleryService.GetGalleryObjects(galleryName, User, null, "bydate");
+         var gallery = GalleryService.GetGallery(galleryName, true, User, null, "bydate");
          var galleryUrl = Url.Action("Show", "Gallery", new { galleryName });
 
          var contentFormat = "<img src=\"{0}\" />" + (settings.StatsEnabled ? "<div>Voted by {1} user(s), Uploaded by {2}</div>" : null);
 
-         var items = from model in modelData
-                     let title = model.Title ?? model.Name
-                     let itemUri = new Uri(baseUri, galleryUrl + "#" + model.GetHash())
-                     let imageUri = new Uri(baseUri, Url.ThumbnailUrl(model.Gallery, model.Name))
-                     let author = model.User != null && settings.StatsEnabled ? Regex.Replace(model.User, ".*\\\\(.*)|(.*)@.*", "$1$2") : "Anonymous" // remove domain / email            
-                     let description = new TextSyndicationContent(string.Format(contentFormat, imageUri, model.VoteCount, author), TextSyndicationContentKind.Html)
-                     select new SyndicationItem(title, description, itemUri, itemUri.ToString(), model.Date)
+         var items = from photo in gallery.Photos
+                     let title = photo.Title ?? photo.Name
+                     let itemUri = new Uri(baseUri, galleryUrl + "#" + photo.GetHash())
+                     let imageUri = new Uri(baseUri, Url.ThumbnailUrl(galleryName, photo.Name))
+                     let author = photo.User != null && settings.StatsEnabled ? Regex.Replace(photo.User, ".*\\\\(.*)|(.*)@.*", "$1$2") : "Anonymous" // remove domain / email            
+                     let description = new TextSyndicationContent(string.Format(contentFormat, imageUri, photo.TotalVotes, author), TextSyndicationContentKind.Html)
+                     select new SyndicationItem(title, description, itemUri, itemUri.ToString(), photo.Date)
                      {
                         Title = new TextSyndicationContent(title),
                         Summary = description,
                         Authors = { new SyndicationPerson { Name = author } },
-                        PublishDate = model.PublishDate
+                        PublishDate = photo.PublishDate
                      };
 
-         var galleryData = GalleryService.GetGallery(galleryName);
-         var gallerySummary = string.Format("Publish date: {0}, {1} vote(s), {2} photo(s) by {3} user(s)", galleryData.PublishDate.ToShortDateString(), galleryData.VoteCount, galleryData.TotalPhotos, galleryData.UserCount);
+         var gallerySummary = string.Format("Publish date: {0}, {1} vote(s), {2} photo(s) by {3} user(s)", gallery.PublishDate.ToShortDateString(), gallery.TotalVotes, gallery.Photos.Count(), gallery.TotalUsers);
          var galleryUri = new Uri(baseUri, galleryUrl);
          var feed = new SyndicationFeed(galleryName, gallerySummary, galleryUri, items)
                      {
                         Id = galleryUri.ToString(),
                         Title = new TextSyndicationContent(galleryName),
-                        LastUpdatedTime = galleryData.Date,
+                        LastUpdatedTime = gallery.Date,
                         Description = new TextSyndicationContent(gallerySummary),
                      };
 
@@ -151,13 +150,12 @@ namespace PhotoVoterMvc.Controllers
       [GalleryCache(GalleryNameParameter = "galleryName")]
       public ActionResult Show(string galleryName, string filter, string sort)
       {
-         var modelData = GalleryService.GetGalleryObjects(galleryName, User, filter, sort);
+         var gallery = GalleryService.GetGallery(galleryName, true, User, filter, sort);
          var settings = GalleryService.GetGallerySettings(galleryName);
 
          // add some data to view data dictionary
          ViewBag.Filter = filter;
          ViewBag.SortOrder = sort;
-         ViewBag.GalleryName = galleryName;
          ViewBag.AllowUpload = settings.UploadEnabled;
          ViewBag.VotingEnabled = settings.VotingEnabled;
          ViewBag.StatsEnabled = settings.StatsEnabled;
@@ -165,11 +163,11 @@ namespace PhotoVoterMvc.Controllers
 
          if (Request.IsAjaxRequest())
          {
-            return PartialView("_GalleryImages", modelData);
+            return PartialView("_GalleryImages", gallery);
          }
          else
          {
-            return View("Show", modelData);
+            return View("Show", gallery);
          }
       }
 
@@ -332,7 +330,7 @@ namespace PhotoVoterMvc.Controllers
             if (Request.IsAjaxRequest())
             {
                // if ajax request => return json
-               return Json(new { data.UserVote, data.VoteCount }, JsonRequestBehavior.AllowGet);
+               return Json(new { data.UserVote, data.TotalVotes }, JsonRequestBehavior.AllowGet);
             }
 
          }

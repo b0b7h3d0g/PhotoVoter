@@ -5,7 +5,6 @@ using System.Configuration;
 using System.Data;
 using System.Data.Objects;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Security;
@@ -108,89 +107,12 @@ namespace PhotoVoterMvc.Services
       /// <summary>
       /// 
       /// </summary>
-      /// <param name="galleryName"></param>
-      /// <param name="user"></param>
-      /// <param name="filter"></param>
-      /// <param name="sort"></param>
-      /// <returns></returns>
-      public IEnumerable<GalleryData> GetGalleryObjects(string galleryName, IPrincipal user, string filter, string sort)
-      {
-         var galleryFolder = GetGalleryDirectory(galleryName);
-         var galleryImages = galleryFolder.EnumerateImages();
-
-         var entities = new DatabaseEntities();
-         var userName = user.Identity.Name;
-
-         // get all votes grouped by image
-         var votes = from entity in entities.Votes
-                     where entity.Gallery == galleryName
-                     group entity by entity.Image
-                        into votesGroup
-                        select new
-                        {
-                           ImageName = votesGroup.Key,
-                           Count = votesGroup.Count(),
-                           UserVote = votesGroup.Any(g => g.User == userName)
-                        };
-         
-         // for each gallery file, join the votes create the model for the view
-         // filter by user (if required)
-         var modelData = from imageFile in galleryImages
-                         join vote in votes on imageFile.Name equals vote.ImageName into joined
-                         join upload in entities.Uploads on new { galleryName, imageName = imageFile.Name } equals new { galleryName = upload.Gallery, imageName = upload.Image } into uploads
-                         from upload in uploads.DefaultIfEmpty()
-                         from vote in joined.DefaultIfEmpty()
-                         where ((filter != "user" && filter != "upload") || (filter == "user" && vote != null && vote.UserVote) || (filter == "upload" && upload != null && upload.User == userName))
-                         let title = upload != null ? upload.Title : null
-                         let author = upload != null ? upload.User : null
-                         select new GalleryData
-                                   {
-                                      FullPath = imageFile.FullName,
-                                      Gallery = galleryName,
-                                      Title = title,
-                                      Name = imageFile.Name,
-                                      VoteCount = vote != null ? vote.Count : 0,
-                                      UserVote = vote != null && vote.UserVote,
-                                      Date = imageFile.LastWriteTimeUtc,
-                                      User = author,
-                                      PublishDate = imageFile.CreationTimeUtc,
-                                      TotalPhotos = 1
-                                   };
-         
-         var rand = new Random();
-
-         // applies sort order
-         if (string.Equals(sort, "byvote", StringComparison.OrdinalIgnoreCase))
-         {
-            var statsEnabled = (from set in entities.Settings where set.Gallery == galleryName select set.StatsEnabled).SingleOrDefault();
-            if (!statsEnabled && !IsAdminUser(user))
-            {
-               throw new SecurityException("Not authorized");
-            }
-
-            modelData = modelData.OrderByDescending(t => t.VoteCount);
-         }
-         else if (string.Equals(sort, "bydate", StringComparison.OrdinalIgnoreCase))
-         {
-            modelData = modelData.OrderByDescending(t => t.Date);
-         }
-         else
-         {
-            modelData = modelData.OrderBy(t => rand.Next(1000));
-         }
-
-         return modelData;
-      }
-
-      /// <summary>
-      /// 
-      /// </summary>
       /// <param name="top"></param>
       /// <returns></returns>
       public IEnumerable<GalleryData> GetGalleries(int top)
       {
          var contentDirectory = GetGalleryDirectory();
-
+         
          var entities = new DatabaseEntities();
 
          // get available galleries (top x)
@@ -203,15 +125,15 @@ namespace PhotoVoterMvc.Services
                      join votes in entities.Votes on gallery.Name equals votes.Gallery into joined
                      let stats = from vote in joined group vote by vote.User into groupedByUser select new { User = groupedByUser.Key, Votes = groupedByUser.Count() }
                      select new GalleryData
-                               {
-                                  FullPath = contentDirectory.FullName,
-                                  Gallery = gallery.Name,
-                                  TotalPhotos = gallery.EnumerateImages().Count(),
-                                  Date = gallery.LastWriteTimeUtc,
-                                  PublishDate = gallery.CreationTimeUtc,
-                                  VoteCount = stats.Sum(entry => entry.Votes),
-                                  UserCount = stats.Count()
-                               };
+                     {
+                        FullPath = contentDirectory.FullName,
+                        Name = gallery.Name,
+                        Photos = gallery.EnumerateImages().Select(file => new GalleryItem { Name = file.Name }),
+                        Date = gallery.LastWriteTimeUtc,
+                        PublishDate = gallery.CreationTimeUtc,
+                        TotalVotes = stats.Sum(entry => entry.Votes),
+                        TotalUsers = stats.Count()
+                     };
 
          return model;
       }
@@ -220,28 +142,95 @@ namespace PhotoVoterMvc.Services
       /// 
       /// </summary>
       /// <returns></returns>
-      public GalleryData GetGallery(string galleryName)
+      public GalleryData GetGallery(string galleryName, bool includeDetails, IPrincipal user, string filter = null, string sort = null)
       {
+         IEnumerable<GalleryItem> photos;
+
          var gallery = GetGalleryDirectory(galleryName);
+         var galleryImages = gallery.EnumerateImages();
 
          var entities = new DatabaseEntities();
+         var galleryVotes = from entity in entities.Votes
+                            where entity.Gallery == galleryName
+                            select entity;
 
-         var votes =
-            from vote in entities.Votes
-            where galleryName == vote.Gallery
-            group vote by vote.User
-            into groupedByUser
-            select new { User = groupedByUser.Key, Votes = (int?)groupedByUser.Count() };
+         if (includeDetails)
+         {
+            var userName = user.Identity.Name;
+
+            // get all votes grouped by image
+            var votesByImage = from entity in galleryVotes
+                               group entity by entity.Image into votesGroup
+                               select new
+                               {
+                                  ImageName = votesGroup.Key,
+                                  Count = votesGroup.Count(),
+                                  UserVote = votesGroup.Any(g => g.User == userName)
+                               };
+
+            // for each gallery file, join the votes create the model for the view
+            // filter by user (if required)
+            photos = from imageFile in galleryImages
+                     join vote in votesByImage on imageFile.Name equals vote.ImageName into joined
+                     join upload in entities.Uploads on new { galleryName, imageName = imageFile.Name } equals new { galleryName = upload.Gallery, imageName = upload.Image } into uploads
+                     from upload in uploads.DefaultIfEmpty()
+                     from vote in joined.DefaultIfEmpty()
+                     where ((filter != "user" && filter != "upload") || (filter == "user" && vote != null && vote.UserVote) || (filter == "upload" && upload != null && upload.User == userName))
+                     let title = upload != null ? upload.Title : null
+                     let author = upload != null ? upload.User : null
+                     select new GalleryItem
+                     {
+                        Title = title,
+                        Name = imageFile.Name,
+                        Gallery = galleryName,
+                        TotalVotes = vote != null ? vote.Count : 0,
+                        UserVote = vote != null && vote.UserVote,
+                        Date = imageFile.LastWriteTimeUtc,
+                        PublishDate = imageFile.CreationTimeUtc,
+                        User = author,
+                        FullPath = imageFile.FullName,
+                     };           
+         }
+         else
+         {
+            photos = galleryImages.Select(file => new GalleryItem { Name = file.Name });
+         }
+
+         // applies sort order
+         if (string.Equals(sort, "byvote", StringComparison.OrdinalIgnoreCase))
+         {
+            var statsEnabled = (from set in entities.Settings where set.Gallery == galleryName select set.StatsEnabled).SingleOrDefault();
+            if (!statsEnabled && !IsAdminUser(user))
+            {
+               throw new SecurityException("Not authorized");
+            }
+
+            photos = photos.OrderByDescending(t => t.TotalVotes);
+         }
+         else if (string.Equals(sort, "bydate", StringComparison.OrdinalIgnoreCase))
+         {
+            photos = photos.OrderByDescending(t => t.Date);
+         }
+         else
+         {
+            var rand = new Random();
+            photos = photos.OrderBy(t => rand.Next(1000));
+         } 
+
+         var votesByUser = from vote in galleryVotes
+                           group vote by vote.User
+                           into groupedByUser
+                           select new { User = groupedByUser.Key, Votes = (int?)groupedByUser.Count() };
          
          return new GalleryData
          {
             FullPath = gallery.FullName,
-            Gallery = gallery.Name,
-            TotalPhotos = gallery.EnumerateImages().Count(),
+            Name = gallery.Name,
+            Photos = photos,
             Date = gallery.LastWriteTimeUtc,
             PublishDate = gallery.CreationTimeUtc,
-            VoteCount = votes.Sum(entry => entry.Votes) ?? 0,
-            UserCount = votes.Count()
+            TotalVotes = votesByUser.Sum(entry => entry.Votes) ?? 0,
+            TotalUsers = votesByUser.Count()
          };
       }
 
@@ -254,7 +243,7 @@ namespace PhotoVoterMvc.Services
       /// <param name="removeVote"></param>
       /// <exception cref="HttpException">If something went wrong</exception>
       /// <returns></returns>
-      public GalleryData Vote(string galleryName, string imageName, IPrincipal user, bool? removeVote = null)
+      public GalleryItem Vote(string galleryName, string imageName, IPrincipal user, bool? removeVote = null)
       {
          var galleryDirectory = GetGalleryDirectory(galleryName);
 
@@ -328,16 +317,15 @@ namespace PhotoVoterMvc.Services
                voteStatus = true;
             }
 
-            return new GalleryData
-                      {
-                         FullPath = galleryFile.FullName,
-                         Name = galleryFile.Name,
-                         UserVote = voteStatus != false, // null or true
-                         Gallery = galleryDirectory.Name,
-                         VoteCount = setting.StatsEnabled ? votes.Count() : 0,
-                         User = user.Identity.Name,
-                         TotalPhotos = 1
-                      };
+            return new GalleryItem
+            {
+               FullPath = galleryFile.FullName,
+               Name = galleryFile.Name,
+               UserVote = voteStatus != false, // null or true
+               TotalVotes = setting.StatsEnabled ? votes.Count() : 0,
+               User = user.Identity.Name,
+               Gallery = galleryName
+            };
          }
          catch (HttpException)
          {
@@ -516,38 +504,33 @@ namespace PhotoVoterMvc.Services
       public void DeleteImage(string galleryName, string fileName, IPrincipal user)
       {
          var entities = new DatabaseEntities();
-         var entity = (from upload in entities.Uploads
-                       where upload.Gallery == galleryName && upload.Image == fileName
-                       select upload).SingleOrDefault();
+         var entity = entities.Uploads.SingleOrDefault(upload => upload.Gallery == galleryName && upload.Image == fileName);
 
          if (entity != null)
          {
-            if (IsAdminUser(user))
+            if (!IsAdminUser(user))
             {
-               entities.Uploads.DeleteObject(entity);
-            }
-            else
-            {
-               var uploadEnabled = (from set in entities.Settings where set.Gallery == galleryName select set.UploadEnabled).SingleOrDefault();
+               var uploadEnabled = entities.Settings.Where(set => set.Gallery == galleryName).Select(set => set.UploadEnabled).SingleOrDefault();
                if (uploadEnabled != true)
                {
                   throw new SecurityException("Not authorized");
                }
 
-               if (string.Equals(entity.User, user.Identity.Name, StringComparison.OrdinalIgnoreCase))
-               {
-                  entities.Uploads.DeleteObject(entity);
-               }
-               else
+               if (!string.Equals(entity.User, user.Identity.Name, StringComparison.OrdinalIgnoreCase))
                {
                   throw new SecurityException("Only the owner can remove the image");
                }
             }
+
+            entities.Uploads.DeleteObject(entity);
          }
          else if (!IsAdminUser(user))
          {
-            throw new SecurityException("Only the owner can remove the image");
+            throw new SecurityException("Only the administrator can remove this image");
          }
+
+         // Remove all existing votes connected to this image
+         // entities.ExecuteStoreCommand("DELETE FROM Votes WHERE Gallery = {0} AND Image = {1}", galleryName, fileName);
 
          var galleryDirectory = GetGalleryDirectory(galleryName);
          var destinationFilePath = Path.Combine(galleryDirectory.FullName, fileName);
@@ -582,7 +565,7 @@ namespace PhotoVoterMvc.Services
       /// <param name="user"></param>
       /// <exception cref="HttpException">If something went wrong</exception>
       /// <returns></returns>
-      public GalleryData GetGalleryImage(string galleryName, string imageName, IPrincipal user)
+      public GalleryItem GetGalleryImage(string galleryName, string imageName, IPrincipal user)
       {
          FileInfo galleryFile;
 
@@ -608,23 +591,22 @@ namespace PhotoVoterMvc.Services
             var userVote = votes.Any(vote => vote.User == user.Identity.Name);
             
             // count all votes
-            var voteCount = votes.Count();
+            var totalVotes = votes.Count();
 
             // now get some more details about this image
             var uploads = entities.Uploads.Where(upload => upload.Gallery == galleryName && upload.Image == imageName).SingleOrDefault();
 
-            return new GalleryData
+            return new GalleryItem
             {
                FullPath = galleryFile.FullName,
                Name = galleryFile.Name,
                Title = uploads != null ? uploads.Title : null,
+               Gallery = galleryName,
                UserVote = userVote,
-               Gallery = galleryDirectory.Name,
-               VoteCount = voteCount,
+               TotalVotes = totalVotes,
                Date = galleryFile.LastWriteTimeUtc,
-               User = uploads != null ? uploads.User : null,
                PublishDate = galleryFile.CreationTimeUtc,
-               TotalPhotos = 1
+               User = uploads != null ? uploads.User : null,
             };
          }
          catch (Exception ex)
@@ -744,7 +726,7 @@ namespace PhotoVoterMvc.Services
 
          gallery.Create();
 
-         return GetGallery(galleryName);
+         return GetGallery(galleryName, false, user);
       }
 
       /// <summary>

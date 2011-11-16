@@ -20,19 +20,19 @@
    @foreach (var item in Model)
    {
    <li>
-      <a class="frame noise" href="@Url.Action("Show", "Gallery", new { galleryName = item.Gallery })" title="Click to view all photos">
-         @if (item.TotalPhotos > 0)
+      <a class="frame noise" href="@Url.Action("Show", "Gallery", new { galleryName = item.Name })" title="Click to view all photos">
+         @if (item.Photos.Count() > 0)
          {
-            <img src="@Url.ThumbnailUrl(item.Gallery, "thumbnail.rnd")" alt="Click to view all photos" />   
+            <img src="@Url.ThumbnailUrl(item.Name, "thumbnail.rnd")" alt="Click to view all photos" />   
          }
          else
          {
             <div class="no-image"></div>
          }
          <span class="description">
-            <span class="name">@item.Gallery</span>
+            <span class="name">@item.Name</span>
             <span class="date">@item.PublishDate.ToShortDateString()</span>
-            <span class="votes">@item.TotalPhotos photo(s)@if (item.VoteCount > 0){<text>, @item.VoteCount vote(s) by @item.UserCount user(s)</text>}</span>
+            <span class="votes">@item.Photos.Count() photo(s)@if (item.TotalVotes > 0){<text>, @item.TotalVotes vote(s) by @item.TotalUsers user(s)</text>}</span>
          </span>
       </a>
    </li>

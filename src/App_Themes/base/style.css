@@ -8,12 +8,13 @@ a img       { border: none }
 img.left    { float: left; margin: 7px 30px 0 0 }
 img.right   { float: right; margin: 7px 0 0 30px }
 hr, .hidden { display: none }
+.clearer    { clear: both }
 
 /* Header */
 #header { border-top: 1px solid #262626; width: 890px; margin: 5px auto 0 auto; padding: 0px; height: 34px; background: url(images/splitter.png) repeat-x 0 0; -moz-border-radius: 10px 10px 0 0; -webkit-border-radius: 10px 10px 0 0; border-radius: 10px 10px 0 0; text-align: center }
 
 /* Page */
-#page { width: 850px; min-height: 600px; margin: 0 auto; padding: 15px 20px 0px 20px; background: #000; border-bottom: 1px solid #2B2B2B; -moz-border-radius: 0 0 10px 10px; -webkit-border-radius: 0 0 10px 10px; border-radius: 0 0 10px 10px }
+#page { position: relative; width: 850px; min-height: 600px; margin: 0 auto; padding: 15px 20px 0px 20px; background: #000; border-bottom: 1px solid #2B2B2B; -moz-border-radius: 0 0 10px 10px; -webkit-border-radius: 0 0 10px 10px; border-radius: 0 0 10px 10px }
 
 /* Logo */
 #logo { width: 850px; height: 105px; margin: 10px auto 0 auto; position: relative }
@@ -46,10 +47,10 @@ hr, .hidden { display: none }
 #login .aside a { float: right; font-weight: bold }
 
 /* Content */
+#content        { clear: both }
 #content .title { height: 44px; text-decoration: none; text-transform: capitalize; font-size: 3em; color: #FFFFFF }
-#content .meta { height: 32px; margin-top: -10px; margin-left: 2px; padding: 4px 30px 2px 0px; font-family: Arial, Helvetica, sans-serif; font-weight: normal; font-size: 0.8em; color: #66665E }
+#content .meta  { height: 32px; margin-top: -10px; margin-left: 2px; padding: 4px 30px 2px 0px; font-family: Arial, Helvetica, sans-serif; font-weight: normal; font-size: 0.8em; color: #66665E }
 #content .meta span { display: block; margin-top: -10px }
-#content .meta a { }
 #content .entry { border-top: 1px solid #2B2B2B; padding: 10px 0px }
 #content .links { background: #2A4345; border: 1px solid #5F817E }
 #content .links { display: block; width: 120px; height: 18px; margin: 0px 0px 4px 0px; padding: 3px 0px 0px 40px; text-decoration: none; font-family: Arial, Helvetica, sans-serif; font-size: 0.9em; text-decoration: none; font-weight: bold; color: #FFFFFF }
@@ -217,11 +218,11 @@ ul.photos li.photo .info a.delete:hover { background-position: 0 2px }
 #footer { width: 890px; height: 100px; margin: 0 auto; padding: 5px 0 0 0; text-align: center }
 #footer div { margin: 5px auto }
 #footer p { margin: 0; text-align: center; line-height: normal; text-transform: uppercase; font-size: 1em }
-#footer a { color: #fff; text-shadow: 0px 1px 0px #000; filter: dropshadow(color=#000, offx=0, offy=1); text-decoration: none; font-size: 1.2em }
-#footer #back a { background: url(images/home.png) 0 0 no-repeat; margin: 3px 0; padding: 3px 0 0 25px }
-#footer #back a:hover { background-position: 0 -20px; color: #bbb }
-#footer #contact a { background: url(images/email.png) 0 0 no-repeat; margin: 3px 0; padding: 3px 0 1px 25px }
-#footer #contact a:hover { background-position: 0 -20px; color: #bbb }
+#footer a { color: #fff; text-shadow: 0px 1px 0px #000; filter: dropshadow(color=#000, offx=0, offy=1); text-decoration: none; font-size: 1.2em; padding: 3px 5px 1px 25px; margin: 3px 0; }
+#footer a#back  { background: url(images/home.png) 0 0 no-repeat }
+#footer a#back:hover { background-position: 0 -20px; color: #bbb }
+#footer a#contact  { background: url(images/email.png) 0 0 no-repeat }
+#footer a#contact:hover { background-position: 0 -20px; color: #bbb }
 
 /* splitter */
 ul.splitter { margin: 0; text-align: center; padding: 10px 0px 0px 0px; font-size: 1em; list-style-type: none; display: block }
@@ -264,6 +265,13 @@ ul.splitter ul li.selected {
    -webkit-box-shadow:inset 0 1px 5px 0 rgba(0,0,0,0.7);
            box-shadow:inset 0 1px 5px 0 rgba(0,0,0,0.7)
 }
+
+/* stats */
+ul.stats { list-style-type: none; margin: 5px auto 5px auto; width: 170px; height: 45px }
+ul.stats li { float: left; padding: 30px 20px 0 20px }
+ul.stats li.votes { background: url(images/star-out.png) top center no-repeat }
+ul.stats li.pictures { background: url(images/photos.png) top center no-repeat }
+ul.stats li.users { background: url(images/group.png) top center no-repeat }
 
 /* error */
 #error { background: url(images/error.png) no-repeat center top; padding-top: 250px; text-align: center }

@@ -57,13 +57,11 @@
       <div id="content">
          @RenderBody()
       </div>
-      <div style="clear: both;">&nbsp;</div>
+      <div class="clearer"></div>
    </div>
    <div id="footer">
       <div>
-         <span id="back">@Html.ActionLink("To galleries", "Index", "Gallery")</span> 
-         | 
-         <span id="contact">@Html.ActionLink("Contact", "Index", "Contact", null, new { @class = "openDialog" }) </span>
+         @Html.ActionLink("To galleries", "Index", "Gallery", null, new { id = "back"})|@Html.ActionLink("Contact", "Index", "Contact", null, new { @class = "openDialog", id = "contact" })
       </div>
       <p>Copyright (c) @DateTime.Now.Year. All rights reserved.</p>
    </div>
