@@ -16,7 +16,7 @@ namespace PhotoVoterMvc.Services.Model
       [Required, DataType(DataType.MultilineText)]
       public string Message { get; set; }
 
-      // Remote Validator - new in MVC3
+      // Remote Validator - new in MVC3...
       //
       // [Remote("UserNameAvailable", "Users")]
       // [AdditionalMetadata("AdminOnly", true)] - new in MVC3
