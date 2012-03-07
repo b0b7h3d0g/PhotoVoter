@@ -1,14 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Configuration;
-using System.Security.Principal;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
-using System.Web.Security;
-using System.Web.SessionState;
-using PhotoVoterMvc.Extenders;
-using PhotoVoterMvc.Models;
 using PhotoVoterMvc.Services;
 
 namespace PhotoVoterMvc
@@ -23,16 +14,13 @@ namespace PhotoVoterMvc
          AreaRegistration.RegisterAllAreas();
          RegisterGlobalFilters(GlobalFilters.Filters);
          RegisterRoutes(RouteTable.Routes);
-
-         // This is now done by MefContrib.MVC3
          RegisterDependencyResolvers();
       }
 
-       // Poor's man IoC, replaced by MefContrib.MVC
-       private static void RegisterDependencyResolvers()
-       {          
-          DependencyResolver.SetResolver(new ControllerServiceResolver());
-       }
+      private static void RegisterDependencyResolvers()
+      {
+         DependencyResolver.SetResolver(new ControllerServiceResolver());
+      }
 
       public static void RegisterGlobalFilters(GlobalFilterCollection filters)
       {

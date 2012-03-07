@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Runtime.Serialization;
-using System.Security.Principal;
-using PhotoVoterMvc.Extenders;
 
 namespace PhotoVoterMvc.Services.Model
 {
