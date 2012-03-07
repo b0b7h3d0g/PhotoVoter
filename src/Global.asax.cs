@@ -9,6 +9,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using PhotoVoterMvc.Extenders;
 using PhotoVoterMvc.Models;
+using PhotoVoterMvc.Services;
 
 namespace PhotoVoterMvc
 {
@@ -24,21 +25,14 @@ namespace PhotoVoterMvc
          RegisterRoutes(RouteTable.Routes);
 
          // This is now done by MefContrib.MVC3
-         // RegisterDependencyResolvers();
-
-         var db = new DatabaseEntities();
-         if (!db.DatabaseExists())
-         {
-            // create database
-            db.CreateDatabase();
-         }
+         RegisterDependencyResolvers();
       }
 
-      // Poor's man IoC, replaced by MefContrib.MVC
-      // private static void RegisterDependencyResolvers()
-      // {
-      //    DependencyResolver.SetResolver(new ControllerServiceResolver());
-      // }
+       // Poor's man IoC, replaced by MefContrib.MVC
+       private static void RegisterDependencyResolvers()
+       {          
+          DependencyResolver.SetResolver(new ControllerServiceResolver());
+       }
 
       public static void RegisterGlobalFilters(GlobalFilterCollection filters)
       {

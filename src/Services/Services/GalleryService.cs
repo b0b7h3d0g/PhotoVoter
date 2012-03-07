@@ -17,7 +17,7 @@ using PhotoVoterMvc.Services.Model;
 
 namespace PhotoVoterMvc.Services
 {
-   [Export(typeof(IGalleryService))]
+   [Export(typeof(IGalleryService)), PartCreationPolicy(CreationPolicy.Shared)]
    public class GalleryService : IGalleryService
    {
       private static readonly object UploadSyncContext = new object();
@@ -31,6 +31,13 @@ namespace PhotoVoterMvc.Services
       {
          // TODO: Read from configuration or find another way to initialize 
          _physicalApplicationPath = HttpContext.Current.Request.PhysicalApplicationPath;
+
+         var db = new DatabaseEntities();
+         if (!db.DatabaseExists())
+         {
+            // create database
+            db.CreateDatabase();
+         }
       }
 
       public bool IsAdminUser(IPrincipal user)
