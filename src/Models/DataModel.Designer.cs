@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
-
 namespace PhotoVoterMvc.Models
 {
     #region Contexts
@@ -114,6 +114,7 @@ namespace PhotoVoterMvc.Models
         private ObjectSet<Vote> _Votes;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -141,11 +142,11 @@ namespace PhotoVoterMvc.Models
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -178,6 +179,7 @@ namespace PhotoVoterMvc.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -304,6 +306,7 @@ namespace PhotoVoterMvc.Models
         partial void OnStatsEnabledChanged();
 
         #endregion
+
     
     }
     
@@ -329,6 +332,7 @@ namespace PhotoVoterMvc.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -479,6 +483,7 @@ namespace PhotoVoterMvc.Models
         partial void OnTitleChanged();
 
         #endregion
+
     
     }
     
@@ -504,6 +509,7 @@ namespace PhotoVoterMvc.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -630,9 +636,11 @@ namespace PhotoVoterMvc.Models
         partial void OnGalleryChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     
 }
