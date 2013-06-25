@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>MefContrib</id>
+    <version>1.2.2.1</version>
+    <authors>MefContrib</authors>
+    <owners>MefContrib</owners>
+    <projectUrl>http://mefcontrib.codeplex.com/</projectUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=mvcsitemap&amp;DownloadId=208524</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MEF Contrib is a community-developed library of extensions to the Managed Extensibility Framework (MEF).</description>
+    <summary>MEF Contrib is a community-developed library of extensions to the Managed Extensibility Framework (MEF).</summary>
+    <tags>mef ioc di dependency injection composition</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.ComponentModel.Composition" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
