@@ -180,7 +180,7 @@ namespace PhotoVoterMvc.Models
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -199,7 +199,7 @@ namespace PhotoVoterMvc.Models
                 {
                     OnIdChanging(value);
                     ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
+                    _Id = StructuralObject.SetValidValue(value, "Id");
                     ReportPropertyChanged("Id");
                     OnIdChanged();
                 }
@@ -224,7 +224,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnGalleryChanging(value);
                 ReportPropertyChanging("Gallery");
-                _Gallery = StructuralObject.SetValidValue(value, false);
+                _Gallery = StructuralObject.SetValidValue(value, false, "Gallery");
                 ReportPropertyChanged("Gallery");
                 OnGalleryChanged();
             }
@@ -248,7 +248,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnVotingEnabledChanging(value);
                 ReportPropertyChanging("VotingEnabled");
-                _VotingEnabled = StructuralObject.SetValidValue(value);
+                _VotingEnabled = StructuralObject.SetValidValue(value, "VotingEnabled");
                 ReportPropertyChanged("VotingEnabled");
                 OnVotingEnabledChanged();
             }
@@ -272,7 +272,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnUploadEnabledChanging(value);
                 ReportPropertyChanging("UploadEnabled");
-                _UploadEnabled = StructuralObject.SetValidValue(value);
+                _UploadEnabled = StructuralObject.SetValidValue(value, "UploadEnabled");
                 ReportPropertyChanged("UploadEnabled");
                 OnUploadEnabledChanged();
             }
@@ -296,7 +296,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnStatsEnabledChanging(value);
                 ReportPropertyChanging("StatsEnabled");
-                _StatsEnabled = StructuralObject.SetValidValue(value);
+                _StatsEnabled = StructuralObject.SetValidValue(value, "StatsEnabled");
                 ReportPropertyChanged("StatsEnabled");
                 OnStatsEnabledChanged();
             }
@@ -307,7 +307,6 @@ namespace PhotoVoterMvc.Models
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -333,7 +332,7 @@ namespace PhotoVoterMvc.Models
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -352,7 +351,7 @@ namespace PhotoVoterMvc.Models
                 {
                     OnIdChanging(value);
                     ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
+                    _Id = StructuralObject.SetValidValue(value, "Id");
                     ReportPropertyChanged("Id");
                     OnIdChanged();
                 }
@@ -377,7 +376,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnGalleryChanging(value);
                 ReportPropertyChanging("Gallery");
-                _Gallery = StructuralObject.SetValidValue(value, true);
+                _Gallery = StructuralObject.SetValidValue(value, true, "Gallery");
                 ReportPropertyChanged("Gallery");
                 OnGalleryChanged();
             }
@@ -401,7 +400,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnImageChanging(value);
                 ReportPropertyChanging("Image");
-                _Image = StructuralObject.SetValidValue(value, true);
+                _Image = StructuralObject.SetValidValue(value, true, "Image");
                 ReportPropertyChanged("Image");
                 OnImageChanged();
             }
@@ -425,7 +424,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnUserChanging(value);
                 ReportPropertyChanging("User");
-                _User = StructuralObject.SetValidValue(value, true);
+                _User = StructuralObject.SetValidValue(value, true, "User");
                 ReportPropertyChanged("User");
                 OnUserChanged();
             }
@@ -449,7 +448,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnLastUpdateChanging(value);
                 ReportPropertyChanging("LastUpdate");
-                _LastUpdate = StructuralObject.SetValidValue(value);
+                _LastUpdate = StructuralObject.SetValidValue(value, "LastUpdate");
                 ReportPropertyChanged("LastUpdate");
                 OnLastUpdateChanged();
             }
@@ -473,7 +472,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnTitleChanging(value);
                 ReportPropertyChanging("Title");
-                _Title = StructuralObject.SetValidValue(value, true);
+                _Title = StructuralObject.SetValidValue(value, true, "Title");
                 ReportPropertyChanged("Title");
                 OnTitleChanged();
             }
@@ -484,7 +483,6 @@ namespace PhotoVoterMvc.Models
 
         #endregion
 
-    
     }
     
     /// <summary>
@@ -510,7 +508,7 @@ namespace PhotoVoterMvc.Models
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -529,7 +527,7 @@ namespace PhotoVoterMvc.Models
                 {
                     OnIdChanging(value);
                     ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
+                    _Id = StructuralObject.SetValidValue(value, "Id");
                     ReportPropertyChanged("Id");
                     OnIdChanged();
                 }
@@ -554,7 +552,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnLastUpdateChanging(value);
                 ReportPropertyChanging("LastUpdate");
-                _LastUpdate = StructuralObject.SetValidValue(value);
+                _LastUpdate = StructuralObject.SetValidValue(value, "LastUpdate");
                 ReportPropertyChanged("LastUpdate");
                 OnLastUpdateChanged();
             }
@@ -578,7 +576,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnImageChanging(value);
                 ReportPropertyChanging("Image");
-                _Image = StructuralObject.SetValidValue(value, true);
+                _Image = StructuralObject.SetValidValue(value, true, "Image");
                 ReportPropertyChanged("Image");
                 OnImageChanged();
             }
@@ -602,7 +600,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnUserChanging(value);
                 ReportPropertyChanging("User");
-                _User = StructuralObject.SetValidValue(value, true);
+                _User = StructuralObject.SetValidValue(value, true, "User");
                 ReportPropertyChanged("User");
                 OnUserChanged();
             }
@@ -626,7 +624,7 @@ namespace PhotoVoterMvc.Models
             {
                 OnGalleryChanging(value);
                 ReportPropertyChanging("Gallery");
-                _Gallery = StructuralObject.SetValidValue(value, true);
+                _Gallery = StructuralObject.SetValidValue(value, true, "Gallery");
                 ReportPropertyChanged("Gallery");
                 OnGalleryChanged();
             }
@@ -637,10 +635,8 @@ namespace PhotoVoterMvc.Models
 
         #endregion
 
-    
     }
 
     #endregion
 
-    
 }
