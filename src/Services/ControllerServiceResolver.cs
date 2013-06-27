@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Registration;
 using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using MefContrib.Hosting.Conventions;
-using MefContrib.Hosting.Conventions.Configuration;
 
 namespace PhotoVoterMvc.Services
 {
@@ -29,37 +27,20 @@ namespace PhotoVoterMvc.Services
       }
 
       public ControllerServiceResolver()
-      {
-         // Create MEF catalog based on the contents of ~/bin.
-         //
-         // In latest MEF (.NET 4.5) it will be posibile to use convention model
-         // var registration = new RegistrationBuilder();
-         // registration.Implements<IController>().Export<IController>();
-         // var catalog = new AssemblyCatalog(typeof(Program).Assembly, registration);
-         var controllersRegistry = new PartRegistry();
-         
-         controllersRegistry.Scan(scan => 
-         {
-            scan.Assembly(Assembly.GetExecutingAssembly());
-            scan.Directory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin"));
-         });
+      {         
+         // Create MEF catalog based on existing exports and convention model
+         var registration = new RegistrationBuilder();
 
-         controllersRegistry
-            .Part()
-            .ForTypesAssignableFrom<IController>()
-            .MakeNonShared()
-            .ExportAs<IController>()
-            .Export()
-            .ImportConstructor();
+         registration.ForTypesDerivedFrom<Controller>().SetCreationPolicy(CreationPolicy.NonShared).Export();
 
-         var conventionCatalog = new ConventionCatalog(controllersRegistry);
-         var defaultCatalog = new DirectoryCatalog("bin");
+         //registration.ForTypesMatching(t => t.FullName.StartsWith(Assembly.GetExecutingAssembly().GetName().Name + ".Parts."))
+         //   .SetCreationPolicy(CreationPolicy.NonShared)
+         //   .ExportInterfaces(x => x.IsPublic);
 
          //var filteredCatalog = new FilteringCatalog(defaultCatalog,
          //   def => !def.Metadata.ContainsKey("ServiceType") || string.Equals((string)def.Metadata["ServiceType"], "...", StringComparison.OrdinalIgnoreCase));
          
-         var catalog = new AggregateCatalog(defaultCatalog, conventionCatalog);
-         
+         var catalog = new AssemblyCatalog(Assembly.GetExecutingAssembly(), registration);
          var defaults = new CatalogExportProvider(new TypeCatalog(DefaultGalleryServiceType));
 
          Container = new CompositionContainer(catalog, defaults);
