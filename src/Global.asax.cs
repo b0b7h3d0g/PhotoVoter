@@ -17,7 +17,14 @@ namespace PhotoVoterMvc
          FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
          RouteConfig.RegisterRoutes(RouteTable.Routes);
          //BundleConfig.RegisterBundles(BundleTable.Bundles);
-         DependencyConfig.RegisterDependencyResolvers();         
+         DependencyConfig.RegisterDependencyResolvers();
+
+         KeepAliveService.Start();
+      }
+
+      protected void Application_End()
+      {
+         KeepAliveService.Stop();
       }
    }
 }

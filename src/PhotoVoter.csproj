@@ -153,6 +153,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DependencyConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\KeepAliveService.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ContactController.cs" />
